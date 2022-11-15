@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+APP_ROOT = File.expand_path('../api', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+FileUtils.chdir APP_ROOT do
+  puts '== Creating seeds of current database entries =='
+  system! 'rails export:export_to_seed > db/seeds.rb'
+done
